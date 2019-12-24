@@ -8,6 +8,7 @@ namespace P2FixAnAppDotNetCode.Models
     /// </summary>
     public class Cart : ICart
     {
+        private List<CartLine> _cartLines = new List<CartLine>(); // This will will retain the CartLines, this is the "Cart"
         /// <summary>
         /// Read-only property for dispaly only
         /// </summary>
@@ -19,7 +20,9 @@ namespace P2FixAnAppDotNetCode.Models
         /// <returns></returns>
         private List<CartLine> GetCartLineList()
         {
-            return new List<CartLine>();
+            //return new List<CartLine>(); //Here it used to return a brand new list of empty Cartline
+            return _cartLines; // _cartLines it just returns _cartLines from line 11 that is storing our List of Cartline
+
         }
 
         /// <summary>
@@ -27,7 +30,14 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>//
         public void AddItem(Product product, int quantity)
         {
+            //NEW Todo does product already exist in the cart? If it does increase it's quantity of the item by "1" in the cart
+            //If it doesn't exist in the cart, just add it
             // TODO implement the method
+            CartLine cartItem = new CartLine(); // I need to create a new Cartline because I need to add it to a List of CartLine
+            cartItem.Product = product;
+            cartItem.Quantity = quantity;
+            _cartLines.Add(cartItem);
+            //var test = GetCartLineList(); To test population
         }
 
         /// <summary>
