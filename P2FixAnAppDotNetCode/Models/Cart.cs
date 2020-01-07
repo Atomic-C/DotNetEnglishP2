@@ -33,12 +33,18 @@ namespace P2FixAnAppDotNetCode.Models
             //NEW Todo does product already exist in the cart? If it does increase it's quantity of the item by "1" in the cart
             //If it doesn't exist in the cart, just add it
             // TODO implement the method
+
+
+            FindProductInCartLines(product.Id); //returns product in cart if one is found
             CartLine cartItem = new CartLine(); // I need to create a new Cartline because I need to add it to a List of CartLine
+            
             cartItem.Product = product;
             cartItem.Quantity = quantity;
-            _cartLines.Add(cartItem);
+            
+           _cartLines.Add(cartItem);
+
             //var test = GetCartLineList(); To test population
-        }
+                 }
 
         /// <summary>
         /// Removes a product form the cart
@@ -70,7 +76,20 @@ namespace P2FixAnAppDotNetCode.Models
         public Product FindProductInCartLines(int productId)
         {
             // TODO implement the method
-            return null;
+            //var product = GetCartLineList().FirstOrDefault(p => p.Product.Id == productId); //we're creating a lambda expression to look for the product id within the object
+            //return null;
+            foreach (var cartItem in GetCartLineList()) {
+                if (cartItem.Product.Id == productId)
+                {
+
+                    return cartItem.Product;
+                }
+                /*
+                 We return the cartline list and check each cartItem one by one comparing them with productId
+                 if productId is true, we return the product in the cart
+                */
+            }
+            return null; //return nothing if nothing is found
         }
 
         /// <summary>
@@ -91,7 +110,7 @@ namespace P2FixAnAppDotNetCode.Models
         }
     }
 
-    public class CartLine
+    public class CartLine //contains three properties
     {
         public int OrderLineId { get; set; }
         public Product Product { get; set; }
