@@ -34,17 +34,29 @@ namespace P2FixAnAppDotNetCode.Models
             //If it doesn't exist in the cart, just add it
             // TODO implement the method
 
+            //FindProductInCartLines(product.Id); //returns product in cart if one is found
+            var simple = FindProductInCartLines(product.Id);
+            if (simple != null) //If simple is not null means an item was found in the cart and foreach comes into action.
+            {
+                foreach (var cartLine in GetCartLineList())     //foreach goes through each product of cartline list
+                {
+                    if (cartLine.Product.Id == product.Id)  //the ones that are in cartLine are then compared by their product.Id
+                    {
+                        cartLine.Quantity++;    //if product.Id is the same, means it's the same item and we increment it's quantity by 1.
+                    }
+                }
+            }
+            else //If the product.Id is not same, just add it.
+            {
+                CartLine cartItem = new CartLine(); //I need to create a new Cartline because I need to add it to a List of CartLine
 
-            FindProductInCartLines(product.Id); //returns product in cart if one is found
-            CartLine cartItem = new CartLine(); // I need to create a new Cartline because I need to add it to a List of CartLine
-            
-            cartItem.Product = product;
-            cartItem.Quantity = quantity;
-            
-           _cartLines.Add(cartItem);
+                cartItem.Product = product; //here we set product and quantity as variables for cartItem
+                cartItem.Quantity = quantity;
 
+               _cartLines.Add(cartItem); //adds the cartItem to the cart (the product with different product.Id)
+            }
             //var test = GetCartLineList(); To test population
-                 }
+        }
 
         /// <summary>
         /// Removes a product form the cart
@@ -81,15 +93,14 @@ namespace P2FixAnAppDotNetCode.Models
             foreach (var cartItem in GetCartLineList()) {
                 if (cartItem.Product.Id == productId)
                 {
-
-                    return cartItem.Product;
+                   return cartItem.Product; //return product if one is found
                 }
                 /*
                  We return the cartline list and check each cartItem one by one comparing them with productId
                  if productId is true, we return the product in the cart
                 */
             }
-            return null; //return nothing if nothing is found
+            return null; //return null because the product was not found in the cart
         }
 
         /// <summary>
