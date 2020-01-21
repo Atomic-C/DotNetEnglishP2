@@ -79,7 +79,14 @@ namespace P2FixAnAppDotNetCode.Models
         public double GetAverageValue()
         {
             // TODO implement the method
-            return 0.0;
+            double totalValueOfCart = 0; //we declared a variable to hold totalValueOfCart and gave it zero because we cannot add anything to null.
+            foreach (var cartItem in GetCartLineList()) //we go through each cartItem in the returned cartline list
+            {
+                totalValueOfCart = totalValueOfCart + cartItem.Product.Price * cartItem.Quantity; //totalValueOfCart is the sum of itself plus the price of the product in cartItem times the quantity of the cartItem.
+            } 
+            var countItemsInCartLine = GetCartLineList().Sum(p => p.Quantity); //With this lambda expression we summarize the sum of items to countItemsInCartLine from the returned cartline list
+            var average = totalValueOfCart / countItemsInCartLine; //we average by deviding total price by total item quantity
+            return average; //here we return the average, so by calling GetAverageValue () we return the average value.
         }
 
         /// <summary>
