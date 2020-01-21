@@ -85,7 +85,7 @@ namespace P2FixAnAppDotNetCode.Models
         /// <summary>
         /// Looks after a given product in the cart and returns if it finds it
         /// </summary>
-        public Product FindProductInCartLines(int productId) //this is a METHOD, nothing else.
+        public Product FindProductInCartLines(int productId) //this is a METHOD, nothing else. *Note: This was a test that was fixed so AddItemInCart could work and I didn't even notice.
         {
             // TODO implement the method
             //var product = GetCartLineList().FirstOrDefault(p => p.Product.Id == productId); //we're creating a lambda expression to look for the product id within the object
