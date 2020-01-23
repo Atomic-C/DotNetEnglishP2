@@ -70,7 +70,16 @@ namespace P2FixAnAppDotNetCode.Models
         public double GetTotalValue()
         {
             // TODO implement the method
-            return 0.0;
+            /*
+             Believe it or not totalValueOfCart was already implemented within "GetAverageValue" before we get the average value.
+             And I now have absolutely no clue what GetAllProducts() method in ProductService was supposed to be doing.
+             */
+            double totalValueOfCart = 0; 
+            foreach (var cartItem in GetCartLineList())
+            {
+                totalValueOfCart = totalValueOfCart + cartItem.Product.Price * cartItem.Quantity;
+            }
+            return totalValueOfCart;
         }
 
         /// <summary>
