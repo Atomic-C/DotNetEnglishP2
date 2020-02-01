@@ -1,5 +1,6 @@
 ﻿using P2FixAnAppDotNetCode.Models.Repositories;
 using System.Collections.Generic;
+using P2FixAnAppDotNetCode.Models;
 
 namespace P2FixAnAppDotNetCode.Models.Services
 {
@@ -35,7 +36,7 @@ namespace P2FixAnAppDotNetCode.Models.Services
         {
             foreach (Product product in GetAllProducts()) //for each product in GetAllProducts we compare product.Id with the id being passed.
             {
-                if (product.Id == id) // here is the prduct.Id being compared with the passed id in line 34
+                if (product.Id == id) // here is the product.Id being compared with the passed id in line 34
                 {
                     return product; // If it matches, return the product. If it doesn't, return null, meaning product doesn't exist.
                 }
@@ -50,6 +51,14 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// </summary>
         public void UpdateProductQuantities(Cart cart)
         {
+            
+            foreach (var productDecrementor in GetAllProducts()) // replace var with List<Product> to see what happens if anything***
+            {
+                if (productDecrementor.Id == cart.)  //Figure out what I have to compare it to
+                {
+                    _productRepository.UpdateProductStocks(productDecrementor.Id, 1); //Hover over and the method states to need productId and quantityToRemove, both int
+                }
+            }
             // TODO implement the method
             // update product inventory by using _productRepository.UpdateProductStocks() method.
         }

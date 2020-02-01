@@ -22,8 +22,8 @@ namespace P2FixAnAppDotNetCode.Tests
 
             var products = productService.GetAllProducts();
 
-            //Assert.IsType<List<Product>>(products);
-            Assert.IsType<Product[]>(products);
+            Assert.IsType<List<Product>>(products); //This was a hint? Well, it was the only thing preventing the Product test from passing, last to refactor.
+            //Assert.IsType<Product[]>(products);
 
         }
 
