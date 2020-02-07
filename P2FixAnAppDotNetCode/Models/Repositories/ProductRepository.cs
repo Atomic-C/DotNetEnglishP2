@@ -12,14 +12,14 @@ namespace P2FixAnAppDotNetCode.Models.Repositories
 
         public ProductRepository()
         {
-            _products = new List<Product>();
-            GenerateProductData();
+            _products = new List<Product>(); //Here we are instanciating a new list of products
+            GenerateProductData(); //And here we populate the list with the default values
         }
 
         /// <summary>
         /// Generate the default list of products
         /// </summary>
-        private void GenerateProductData()
+        private void GenerateProductData() //These are the default values for _products
         {
             int id = 0;
             _products.Add(new Product(++id, 10, 92.50, "Echo Dot", "(2nd Generation) - Black"));

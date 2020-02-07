@@ -51,13 +51,14 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// </summary>
         public void UpdateProductQuantities(Cart cart)
         {
+            //ProductRepository productRepo2 = new ProductRepository();
+            //var something = GetAllProducts();
             
-            foreach (var productDecrementor in GetAllProducts()) // replace var with List<Product> to see what happens if anything***
+            foreach (var productDecrementor in cart.Lines) // go throuch each cartLine in Cart
             {
-                if (productDecrementor.Id == cart.)  //Figure out what I have to compare it to
-                {
-                    _productRepository.UpdateProductStocks(productDecrementor.Id, 1); //Hover over and the method states to need productId and quantityToRemove, both int
-                }
+                
+                    _productRepository.UpdateProductStocks(productDecrementor.Product.Id, productDecrementor.Quantity); //Removing the quantity I set, one by one
+                
             }
             // TODO implement the method
             // update product inventory by using _productRepository.UpdateProductStocks() method.

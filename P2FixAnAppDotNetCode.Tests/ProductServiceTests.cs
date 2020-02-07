@@ -50,8 +50,8 @@ namespace P2FixAnAppDotNetCode.Tests
             //will simulate the process from the front end perspective
             //here testing that product stock values are decreasing for each cart checkout, not just a single time
             cart = new Cart();
-            productRepository = new ProductRepository();
-            productService = new ProductService(productRepository, orderRepository);
+            //productRepository = new ProductRepository();  // Because we want to keep using the current ProductRepository
+            //productService = new ProductService(productRepository, orderRepository); // This is reduntant
             products = productService.GetAllProducts();
             cart.AddItem(products.Where(p => p.Id == 1).First(), 1);
             cart.AddItem(products.Where(p => p.Id == 3).First(), 2);
