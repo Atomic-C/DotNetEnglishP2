@@ -30,32 +30,28 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>//
         public void AddItem(Product product, int quantity)
         {
-            //NEW Todo does product already exist in the cart? If it does increase it's quantity of the item by "1" in the cart
-            //If it doesn't exist in the cart, just add it
             // TODO implement the method
-
-            //FindProductInCartLines(product.Id); //returns product in cart if one is found
-            var simple = FindProductInCartLines(product.Id);
-            if (simple != null) //If simple is not null means an item was found in the cart and foreach comes into action.
+            
+            var productInCartLines = FindProductInCartLines(product.Id);
+            if (productInCartLines != null) 
             {
-                foreach (var cartLine in GetCartLineList())     //foreach goes through each product of cartline list
+                foreach (var cartLine in GetCartLineList())    
                 {
-                    if (cartLine.Product.Id == product.Id)  //the ones that are in cartLine are then compared by their product.Id
+                    if (cartLine.Product.Id == product.Id)  
                     {
-                        cartLine.Quantity++;    //if product.Id is the same, means it's the same item and we increment it's quantity by 1.
+                        cartLine.Quantity++;    
                     }
                 }
             }
-            else //If the product.Id is not same, just add it.
+            else 
             {
-                CartLine cartItem = new CartLine(); //I need to create a new Cartline because I need to add it to a List of CartLine
+                CartLine cartItem = new CartLine(); 
 
-                cartItem.Product = product; //here we set product and quantity as variables for cartItem
+                cartItem.Product = product; 
                 cartItem.Quantity = quantity;
 
-               _cartLines.Add(cartItem); //adds the cartItem to the cart (the product with different product.Id)
-            }
-            //var test = GetCartLineList(); To test population
+               _cartLines.Add(cartItem); 
+            }          
         }
 
         /// <summary>
@@ -68,12 +64,7 @@ namespace P2FixAnAppDotNetCode.Models
         /// Get total value of a cart
         /// </summary>
         public double GetTotalValue()
-        {
-            // TODO implement the method
-            /*
-             Believe it or not totalValueOfCart was already implemented within "GetAverageValue" before we get the average value.
-             And I now have absolutely no clue what GetAllProducts() method in ProductService was supposed to be doing.
-             */
+        {   // TODO implement the method
             double totalValueOfCart = 0; 
             foreach (var cartItem in GetCartLineList())
             {
@@ -88,34 +79,31 @@ namespace P2FixAnAppDotNetCode.Models
         public double GetAverageValue()
         {
             // TODO implement the method
-            double totalValueOfCart = 0; //we declared a variable to hold totalValueOfCart and gave it zero because we cannot add anything to null.
-            foreach (var cartItem in GetCartLineList()) //we go through each cartItem in the returned cartline list
+            double totalValueOfCart = 0; 
+            foreach (var cartItem in GetCartLineList()) 
             {
-                totalValueOfCart = totalValueOfCart + cartItem.Product.Price * cartItem.Quantity; //totalValueOfCart is the sum of itself plus the price of the product in cartItem times the quantity of the cartItem.
+                totalValueOfCart = totalValueOfCart + cartItem.Product.Price * cartItem.Quantity; 
             } 
-            var countItemsInCartLine = GetCartLineList().Sum(p => p.Quantity); //With this lambda expression we summarize the sum of items to countItemsInCartLine from the returned cartline list
-            var average = totalValueOfCart / countItemsInCartLine; //we average by deviding total price by total item quantity
-            return average; //here we return the average, so by calling GetAverageValue () we return the average value.
+            var countItemsInCartLine = GetCartLineList().Sum(p => p.Quantity); 
+            var average = totalValueOfCart / countItemsInCartLine; 
+            return average; 
         }
 
         /// <summary>
         /// Looks after a given product in the cart and returns if it finds it
         /// </summary>
-        public Product FindProductInCartLines(int productId) //this is a METHOD, nothing else. *Note: This was a test that was fixed so AddItemInCart could work and I didn't even notice.
+        public Product FindProductInCartLines(int productId) 
         {
             // TODO implement the method
 
             foreach (var cartItem in GetCartLineList()) {
                 if (cartItem.Product.Id == productId)
                 {
-                   return cartItem.Product; //return product if one is found
+                   return cartItem.Product; 
                 }
-                /*
-                 We return the cartline list and check each cartItem one by one comparing them with productId
-                 if productId is true, we return the product in the cart
-                */
+
             }
-            return null; //return null because the product was not found in the cart
+            return null; 
         }
 
         /// <summary>

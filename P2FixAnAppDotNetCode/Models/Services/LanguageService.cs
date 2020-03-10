@@ -20,10 +20,10 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// <summary>
         /// Set the culture
         /// </summary>
-        public string SetCulture(string language) //We're passing language
+        public string SetCulture(string language) 
         {
             string culture = "";
-            switch (language) // We're taking a look at the value of language with a switch case, found here https://www.w3schools.com/cs/cs_switch.asp
+            switch (language) 
             {
                 case "French":
                     culture = "fr";
@@ -32,13 +32,12 @@ namespace P2FixAnAppDotNetCode.Models.Services
                 case "Spanish":
                     culture = "es";
                     break;
-                default: //The default switch will make sure any other language request which is not available will be presented with English.
+                default: 
                     culture = "en";
                     break;
             }            
             // TODO complete the code 
-            // Default language is "en", french is "fr" and spanish is "es".
-            
+          
             return culture;
         }
 

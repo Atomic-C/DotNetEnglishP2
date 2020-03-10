@@ -32,32 +32,29 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// <summary>
         /// Get a product form the inventory by its id
         /// </summary>
-        public Product GetProductById(int id) // Here we follow the same logic behind the foreach in AddItem method.
+        public Product GetProductById(int id) 
         {
-            foreach (Product product in GetAllProducts()) //for each product in GetAllProducts we compare product.Id with the id being passed.
+            foreach (Product product in GetAllProducts()) 
             {
-                if (product.Id == id) // here is the product.Id being compared with the passed id in line 34
+                if (product.Id == id) 
                 {
-                    return product; // If it matches, return the product. If it doesn't, return null, meaning product doesn't exist.
+                    return product; 
                 }
 
             };                   
             // TODO implement the method
-            return null; //This will result in the original error, except it only happens if we give a mystery id we do not have as opposed to any id regardless.
+            return null; 
         }
 
         /// <summary>
         /// Update the quantities left for each product in the inventory depending of ordered the quantities
         /// </summary>
         public void UpdateProductQuantities(Cart cart)
-        {
-            //ProductRepository productRepo2 = new ProductRepository();
-            //var something = GetAllProducts();
-            
-            foreach (var productDecrementor in cart.Lines) // go throuch each cartLine in Cart
+        {           
+            foreach (var productDecrementor in cart.Lines) 
             {
                 
-                    _productRepository.UpdateProductStocks(productDecrementor.Product.Id, productDecrementor.Quantity); //Removing the quantity I set, one by one
+                    _productRepository.UpdateProductStocks(productDecrementor.Product.Id, productDecrementor.Quantity); 
                 
             }
             // TODO implement the method
