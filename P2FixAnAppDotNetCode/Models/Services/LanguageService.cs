@@ -36,7 +36,6 @@ namespace P2FixAnAppDotNetCode.Models.Services
                     culture = "en";
                     break;
             }            
-            // TODO complete the code 
           
             return culture;
         }

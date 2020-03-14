@@ -57,8 +57,6 @@ namespace P2FixAnAppDotNetCode.Models.Services
                     _productRepository.UpdateProductStocks(productDecrementor.Product.Id, productDecrementor.Quantity); 
                 
             }
-            // TODO implement the method
-            // update product inventory by using _productRepository.UpdateProductStocks() method.
         }
     }
 }
