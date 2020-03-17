@@ -30,28 +30,27 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>//
         public void AddItem(Product product, int quantity)
         {
-            // TODO implement the method
-            
+
             var productInCartLines = FindProductInCartLines(product.Id);
-            if (productInCartLines != null) 
+            if (productInCartLines != null)
             {
-                foreach (var cartLine in GetCartLineList())    
+                foreach (var cartLine in GetCartLineList())
                 {
-                    if (cartLine.Product.Id == product.Id)  
+                    if (cartLine.Product.Id == product.Id)
                     {
-                        cartLine.Quantity++;    
+                        cartLine.Quantity++;
                     }
                 }
             }
-            else 
+            else
             {
-                CartLine cartItem = new CartLine(); 
+                CartLine cartItem = new CartLine();
 
-                cartItem.Product = product; 
+                cartItem.Product = product;
                 cartItem.Quantity = quantity;
 
-               _cartLines.Add(cartItem); 
-            }          
+                _cartLines.Add(cartItem);
+            }
         }
 
         /// <summary>
@@ -64,8 +63,8 @@ namespace P2FixAnAppDotNetCode.Models
         /// Get total value of a cart
         /// </summary>
         public double GetTotalValue()
-        {   // TODO implement the method
-            double totalValueOfCart = 0; 
+        {
+            double totalValueOfCart = 0;
             foreach (var cartItem in GetCartLineList())
             {
                 totalValueOfCart = totalValueOfCart + cartItem.Product.Price * cartItem.Quantity;
@@ -78,32 +77,41 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public double GetAverageValue()
         {
-            // TODO implement the method
-            double totalValueOfCart = 0; 
-            foreach (var cartItem in GetCartLineList()) 
+
+            double totalValueOfCart = 0;
+            double average = 0;
+            foreach (var cartItem in GetCartLineList())
             {
-                totalValueOfCart = totalValueOfCart + cartItem.Product.Price * cartItem.Quantity; 
-            } 
-            var countItemsInCartLine = GetCartLineList().Sum(p => p.Quantity); 
-            var average = totalValueOfCart / countItemsInCartLine; 
-            return average; 
+                totalValueOfCart = totalValueOfCart + cartItem.Product.Price * cartItem.Quantity;
+            }
+            var countItemsInCartLine = GetCartLineList().Sum(p => p.Quantity);
+            average = totalValueOfCart / countItemsInCartLine;
+            if (double.IsNaN(average))
+            {
+
+                return 0;
+
+            }
+
+            return average;
         }
 
         /// <summary>
         /// Looks after a given product in the cart and returns if it finds it
         /// </summary>
-        public Product FindProductInCartLines(int productId) 
+        public Product FindProductInCartLines(int productId)
         {
-            // TODO implement the method
 
-            foreach (var cartItem in GetCartLineList()) {
+
+            foreach (var cartItem in GetCartLineList())
+            {
                 if (cartItem.Product.Id == productId)
                 {
-                   return cartItem.Product; 
+                    return cartItem.Product;
                 }
 
             }
-            return null; 
+            return null;
         }
 
         /// <summary>

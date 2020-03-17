@@ -1,6 +1,5 @@
 ﻿using P2FixAnAppDotNetCode.Models.Repositories;
 using System.Collections.Generic;
-using P2FixAnAppDotNetCode.Models;
 
 namespace P2FixAnAppDotNetCode.Models.Services
 {
@@ -24,38 +23,38 @@ namespace P2FixAnAppDotNetCode.Models.Services
         public List<Product> GetAllProducts() //Here, the brackets [] were removed and everything was refactored with the List syntax, including the Collections.Generic
         { //This happened in several other places where "Go to Definition" and "Go to Implementation" hotkeys turned specially useful.
 
-            // TODO change the return type from array to List<T> and propagate the change
-            // thoughout the application
+
+
             return _productRepository.GetAllProducts();
         }
 
         /// <summary>
         /// Get a product form the inventory by its id
         /// </summary>
-        public Product GetProductById(int id) 
+        public Product GetProductById(int id)
         {
-            foreach (Product product in GetAllProducts()) 
+            foreach (Product product in GetAllProducts())
             {
-                if (product.Id == id) 
+                if (product.Id == id)
                 {
-                    return product; 
+                    return product;
                 }
 
-            };                   
-            // TODO implement the method
-            return null; 
+            };
+
+            return null;
         }
 
         /// <summary>
         /// Update the quantities left for each product in the inventory depending of ordered the quantities
         /// </summary>
         public void UpdateProductQuantities(Cart cart)
-        {           
-            foreach (var productDecrementor in cart.Lines) 
+        {
+            foreach (var productDecrementor in cart.Lines)
             {
-                
-                    _productRepository.UpdateProductStocks(productDecrementor.Product.Id, productDecrementor.Quantity); 
-                
+
+                _productRepository.UpdateProductStocks(productDecrementor.Product.Id, productDecrementor.Quantity);
+
             }
         }
     }

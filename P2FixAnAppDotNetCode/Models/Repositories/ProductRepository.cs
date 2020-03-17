@@ -13,12 +13,12 @@ namespace P2FixAnAppDotNetCode.Models.Repositories
         public ProductRepository()
         {
             if (_products == null)
-            { 
+            {
 
-                _products = new List<Product>(); 
-                GenerateProductData(); 
+                _products = new List<Product>();
+                GenerateProductData();
             }
-            
+
         }
 
         /// <summary>
